@@ -36,18 +36,22 @@
 (define (augend expr) (caddr expr))
 
 (define (make-sum . exprs)
-    (cond [(pair? exprs) 
-        (list '+ 
-            (car exprs) 
-            (apply make-sum (cdr exprs)))]
-        [else exprs]))
-
-;; TODO: HAVE TO FIX make-sum
+  (cond 
+    [(= (length exprs) 1) 
+      (car exprs)]
+    [(pair? exprs) 
+      (list '+ (car exprs) (apply make-sum (cdr exprs)))]))
 
 (define (product? expr) (and (pair? expr) (eq? (car expr) '*)))
 (define (multiplier expr) (cadr expr))
 (define (multiplicand expr) (caddr expr))
-(define (make-product expr1 expr2) (list '* expr1 expr2))
+
+(define (make-product . exprs)
+  (cond 
+    [(= (length exprs) 1) 
+      (car exprs)]
+    [(pair? exprs) 
+      (list '* (car exprs) (apply make-product (cdr exprs)))]))
 
 (define (exponentiation? e)
   (and (pair? e) (eq? (car e) '**) (number? (caddr e))))
