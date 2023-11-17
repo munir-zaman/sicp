@@ -1,15 +1,20 @@
 #lang sicp
 
 ;; selectors and constructor
-(define (make-rat n d) (cons n d))
+(define (make-rat n d)
+  (let [(g (gcd n d))]
+    (cons
+     (/ n g)
+     (/ d g))))
+
 (define (numer r) (car r))
 (define (denom r) (cdr r))
 
 (define (print-rat x)
-    (newline)
-    (display (numer x))
-    (display "/")
-    (display (denom x)))
+  (display (numer x))
+  (display "/")
+  (display (denom x))
+  (newline))
 
 ;; x1/y1 + x2/y2 = (x1*y2 + y1*x2)/y1*y2
 (define (add-rat x y)
