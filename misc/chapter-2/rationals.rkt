@@ -5,6 +5,12 @@
 (define (numer r) (car r))
 (define (denom r) (cdr r))
 
+(define (print-rat x)
+    (newline)
+    (display (numer x))
+    (display "/")
+    (display (denom x)))
+
 ;; x1/y1 + x2/y2 = (x1*y2 + y1*x2)/y1*y2
 (define (add-rat x y)
   (make-rat
